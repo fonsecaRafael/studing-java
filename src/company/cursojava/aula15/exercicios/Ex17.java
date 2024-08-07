@@ -11,22 +11,11 @@ public class Ex17 {
 		System.out.print("Informe o ano: ");
 		int year = scan.nextInt();
 		scan.close();
-		boolean bissexto = false;
 		
-		if (year % 4 == 0) {
-			if (year % 100 == 0) {
-				if (year % 400 == 0) {
-					bissexto = true;
-				}
-			}else {
-				bissexto = true;
-			}
-		}
-		
-		if (bissexto) {
+		if ((year % 400 == 0) || (year % 4 == 0 && year % 100 != 0)) {
 			System.out.println("O ano é bissexto.");
-		} else {
-			System.out.println("O ano não é bissexto.");
+			System.exit(0);
 		}
+		System.out.println("O ano não é bissexto.");
 	}
 }

@@ -12,9 +12,9 @@ public class Ex10 {
 		scan.close();
 		
 		switch (turn) {
-		case 'm': System.out.println("Bom dia!"); break;
-		case 'v': System.out.println("Boa tarde!"); break;
-		case 'n': System.out.println("Boa noite!"); break;
+		case 'm', 'M': System.out.println("Bom dia!"); break;
+		case 'v', 'V': System.out.println("Boa tarde!"); break;
+		case 'n', 'N': System.out.println("Boa noite!"); break;
 		default: System.out.println("Turno inválido!");
 		}
 	}

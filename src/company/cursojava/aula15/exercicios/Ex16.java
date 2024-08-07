@@ -20,7 +20,7 @@ public class Ex16 {
 		System.out.print("Informe o valor de C: ");
 		double c = scan.nextDouble();
 		
-		double delta = Math.sqrt(Math.pow(b, 2) - 4 * a * c);
+		double delta = Math.pow(b, 2) - 4 * a * c;
 		if (delta < 0) {
 			System.out.println("Delta negativo, a equação não possui raízes reais... Encerrando o programa.");
 			System.exit(0);
@@ -29,9 +29,9 @@ public class Ex16 {
 			System.out.println("Delta = 0, A equação só possui uma raiz. E ela é: " + raiz);
 			
 		}else {
-			double r1 = (-b + delta) / 2 * a;
-			double r2 = (-b - delta) / 2 * a;
-			System.out.println("A equação possui duas raízes.\rRaiz 1: " + r1 + "\rRaiz 2: " + r2);
+			double r1 = (-b + Math.sqrt(delta)) / 2 * a;
+			double r2 = (-b - Math.sqrt(delta)) / 2 * a;
+			System.out.println("\nA equação possui duas raízes.\nDelta: " + delta + "\nRaiz 1: " + r1 + "\nRaiz 2: " + r2);
 		}
 		scan.close();
 		
