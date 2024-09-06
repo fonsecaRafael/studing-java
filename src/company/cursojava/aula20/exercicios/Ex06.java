@@ -1,6 +1,4 @@
 package company.cursojava.aula20.exercicios;
-
-import java.util.Iterator;
 import java.util.Scanner;
 
 public class Ex06 {
