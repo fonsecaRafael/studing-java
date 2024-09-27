@@ -1,41 +1,43 @@
-package company.cursojava.aula20.exercicios;
+package company.cursojava.aula27.exercicios;
 import java.util.Scanner;
 
-public class Ex06 {
-
-	public static void main(String[] args) {
-		// Tic tac toe, should block invalid plays, it should inform when game reach an end and who is the
-		// winner, each play should renew the console output with the new board.
-		Scanner scan = new Scanner(System.in);
-		int[][] board = new int[3][3];
-		int moves = 0;
-		final String PLAYER1 = "Player 1", PLAYER2 = "Player 2";
-		
+public class TicTacToe {
+	// Rewrite TicTacToe (Ex06 from class 20) as a class that represent the game
+	// and write a class to test the game.
+	int[][] board = new int[3][3];
+	int moves = 0, winner = 0;
+	final String PLAYER1 = "Player 1", PLAYER2 = "Player 2", TIE_MESSAGE = "The game ended in a tie.";
+	Scanner scan = new Scanner(System.in);
+	
+	public void run() {
 		int[] move = new int[2];
 		while(true) {
 			move = askMove(PLAYER1, board, scan);
 			setMove(PLAYER1, move, board);
 			showBoard(board);
-			if(checkEnd(board)) {
+			winner = checkEnd(board);
+			if(winner != 0) {
+				System.out.println(showWinner(winner));
 				break;
 			}
 			moves++;
 			if (moves == 9) {
-				System.out.println("The game ended in a tie");
+				System.out.println(showTieMessage());
 				break;
 			}
 			move = askMove(PLAYER2, board, scan);
 			setMove(PLAYER2, move, board);
 			showBoard(board);
-			if(checkEnd(board)) {
+			winner = checkEnd(board);
+			if(winner != 0) {
+				System.out.println(showWinner(winner));
 				break;
 			}
 			moves++;
 		}
-		scan.close();
 	}
-
-	public static int[] askMove(String player, int[][] board, Scanner scan){
+	
+	public int[] askMove(String player, int[][] board, Scanner scan){
 		int[] result = new int [2];
 		while(true) {
 			System.out.print(player + " insert your desired position\nLine: ");
@@ -47,22 +49,22 @@ public class Ex06 {
 			}
 			System.out.print("Invalid move!\n");
 			showBoard(board);
-		}		
+		}
 	}
-	
-	public static void setMove(String player, int[] position, int[][]board) {
+
+	public void setMove(String player, int[] position, int[][]board) {
 		board[position[0]] [position[1]] = Character.getNumericValue(player.charAt(player.length() - 1));
 	}
-	
-	public static boolean checkPlay(int[] position, int[][] board) {
+
+	public boolean checkPlay(int[] position, int[][] board) {
 		if (position[0] < 0 || position[1] < 0 || position[0] > 2 || position[1] > 2
 				|| board[position[0]] [position[1]] != 0) {
 			return false;
 		}
 		return true;
 	}
-	
-	public static void showBoard(int[][] board){
+
+	public void showBoard(int[][] board){
 		for (int i = 0; i < board.length; i++) {
 			for(int j = 0; j < board[i].length; j++) {
 				if(board[i][j] == 1) {
@@ -76,8 +78,8 @@ public class Ex06 {
 			System.out.println("");
 		}
 	}
-	
-	public static boolean checkEnd(int[][] board){
+
+	public int checkEnd(int[][] board){
 		// This only will work in a quadratic matrix
 		int counterFinish;
 		for (int i = 0; i < board.length; i++) {
@@ -91,8 +93,7 @@ public class Ex06 {
 					counterFinish++;
 				}
 				if(counterFinish == 3) {
-					showWinner(aux);
-					return true;
+					return aux;
 				}
 			}
 			counterFinish = 0;
@@ -101,21 +102,22 @@ public class Ex06 {
 					counterFinish++;
 				}
 				if(counterFinish == 3) {
-					showWinner(aux);
-					return true;
+					return aux;
 				}
 			}
 			if((board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[2][2] != 0) 
 					||(board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[2][0] != 0)) {
-				showWinner(board[1][1]);
-				return true;
+				return board[1][1];
 			}
 		}
-		return false;
+		return 0;
 	}
 
-	public static void showWinner(int winner) {
-		System.out.println("The winner is Player " + winner);
+	public String showWinner(int winner) {
+		return ("The winner is Player " + winner);
 	}
-
+	public String showTieMessage() {
+		return TIE_MESSAGE;
+	}
+	
 }
