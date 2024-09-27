@@ -1,8 +1,8 @@
 package company.cursojava.aula36.exercicios;
 
 public class Student extends Person {
-	float[] grades;
-	float media;
+	private float[] grades;
+	private float media;
 
 	public Student(String name, float[] grades) {
 		super(name);

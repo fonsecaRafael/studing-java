@@ -1,7 +1,7 @@
 package company.cursojava.aula36.exercicios;
 
 public class Professor extends Person {
-	String depart, email;
+	private String depart, email;
 
 	public Professor(String name, String depart, String email) {
 		super(name);
@@ -24,5 +24,4 @@ public class Professor extends Person {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
 }
